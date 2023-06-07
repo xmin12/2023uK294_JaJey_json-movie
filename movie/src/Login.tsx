@@ -26,7 +26,7 @@ function Login() {
                 console.log(response)
                 console.log(response.data.accessToken)
                 localStorage.setItem("token", response.data.accessToken);
-     // window.location.href = 'http://localhost:3030/movies' 
+      window.location.href = 'http://localhost:3030/movies' 
     }) 
      .catch(err => console.log(err));
     }; return (
@@ -46,7 +46,7 @@ function Login() {
                 Send </Button>
                 </label>
             </form>
-        </div>
+        </div>  
         );
 }
 export default Login;
