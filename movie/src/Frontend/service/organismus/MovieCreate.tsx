@@ -1,25 +1,26 @@
 import { useFormik } from "formik";
 import MovieService from "../service/MovieService";
 import { useNavigate, useParams } from "react-router-dom";
+import { MovieType } from "../service/MoviesProp";
 
+export default function MovieCreate() {
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-export default function MovieCreate(){
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const{id}=useParams();
-    const navigate = useNavigate();
- 
-const formik = useFormik({
+  const formik = useFormik({
     initialValues: {
-      movie_name: "",
-      release_date: "",
+      Title: "",
+      ["Release Date"]: "",
+
     },
     onSubmit: (values) => {
-      handleSubmit(values.movie_name, values.release_date);
-    console.log("here",values);
+      handleSubmit(values.Title, values['Release Date']);
+      console.log("here", values);
     },
   });
-  const handleSubmit = (movie_name: string, release_date: string) => {
-    MovieService().createMovie({movie_name, release_date })
+
+  const handleSubmit = (Title: string, release_date: string) => {
+    MovieService().createMovie({ Title, ["Release Date"]: release_date, id: 0 })
       .then((response) => {
         console.log("response", response);
         navigate("/movies");
@@ -27,31 +28,31 @@ const formik = useFormik({
       .catch((error) => {
         console.error(error);
       });
-  };
+    }
 
   return (
     <form onSubmit={formik.handleSubmit}>
       <div>
         <h1>New Movie</h1>
-        <label htmlFor="movie_name">Name</label>
+        <label htmlFor="Title">Name</label>
         <input
-          id="movie_name"
-          name="movie_name"
+          id="Title"
+          name="Title"
           type="text"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          value={formik.values.movie_name}
+          value={formik.values.Title}
         />
       </div>
       <div>
-        <label htmlFor="release_date">release date</label>
+        <label htmlFor="Release Date">release date</label>
         <input
-          id="release_date"
-          name="release_date"
+          id="Release Date"
+          name="Release Date"
           type="text"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          value={formik.values.release_date}
+          value={formik.values["Release Date"]}
         />
       </div>
       <button type="submit">Submit</button>

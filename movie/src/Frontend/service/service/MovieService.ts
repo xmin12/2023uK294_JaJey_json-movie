@@ -1,47 +1,40 @@
 
 import { AxiosInstance } from "axios";
-import { defaultAxiosInstance } from "../Api";
+import { defaultAxiosInstance } from "./Api";
+import { MovieType } from "./MoviesProp";
 
 
 
-
-type addMovieRequest = {
-    movie_name: string;
-    release_date: string;
-  };
-  export type Movie = {
-    id: string;
-    movie_name: string;
-    release_date: string;
-  }
 const MovieService = (api: AxiosInstance = defaultAxiosInstance) => ({
-  getMovieById: async (id: string) => {
-    const response = await api.get<Movie>(`/movies/${id}`);
-    return response.data;
-  },
-    getAllMovie: async () => {
-        const data = await api.get<Movie[]>(`/movies`);
-        return data['data'];
+
+    getLimitedMovieById: async () => {
+        const res = await api.get(`/movies?_limit=9`);
+        return res["data"];
     },
-    createMovie: async (params: addMovieRequest) => {
-      const res = await defaultAxiosInstance.post("/movies", params);
-      if (res && res.status === 200) {
-        console.log("movie successfully created");
-      }
+
+    getAllMovie: async () => {
+        const res = await api.get(`/movies`);
+        return res["data"];
+    },
+
+  getMovieById: async (id: string) => {
+    const res = await api.get(`/movies/${id}`);
+    return res["data"];
+},
+
+    createMovie: async (movie : MovieType) => {
+      const res = await defaultAxiosInstance.post("/movies", movie);
+      return res["data"];
     },
     removeMovie: async (id: string) => {
       const res = await api.delete(`/movies/${id}`)
-      if (res && res.status === 200) {
-        console.log("movie successfully created");
-      }
+      return res["data"];
     },
     
-    updateMovie:async (params: Movie) => {
-      const res = await defaultAxiosInstance.put(`/movies/${params.id}`, params);
-      if(res && res.status === 200) {
-        console.log("movie successfully updated");
-    }
-    
-}});
+    updateMovie:async (movieId : number, movie : MovieType) => {
+      const res = await api.put(`/movies/${movieId}`, movie);
+      return res["data"];
+}
+});
 
 export default MovieService;

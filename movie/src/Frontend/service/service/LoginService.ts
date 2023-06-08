@@ -1,6 +1,6 @@
 
 import { AxiosInstance } from "axios";
-import { defaultAxiosInstance } from "../Api";
+import { defaultAxiosInstance } from "./Api";
 
 export type loginRequest = {
     email: string,

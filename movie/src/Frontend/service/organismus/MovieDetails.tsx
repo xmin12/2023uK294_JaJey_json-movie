@@ -4,15 +4,12 @@ import React, { useEffect } from "react";
 import Card from "@mui/material/Card/Card";
 import Button from "@mui/material/Button/Button";
 import { Create, Delete } from "@mui/icons-material";
+import { MovieType } from "../service/MoviesProp";
 
 
 export default function MovieDetails() {
   const { id } = useParams();
-  const [movie, setMovie] = React.useState({
-    id: "",
-    movie_name: "",
-    release_date: "",
-  });
+  const [movie, setMovie] = React.useState<MovieType>();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,8 +28,8 @@ export default function MovieDetails() {
     <div>
       <Card>
         <p>ID: {id}</p>
-        <p>Movie Name: {movie?.movie_name}</p>
-        <p>Release Date: {movie?.release_date}</p>
+        <p>Movie Name: {movie?.Title}</p>
+        <p>Release Date: {movie?.["Release Date"]}</p>
       </Card>
       <div>
         <Button
