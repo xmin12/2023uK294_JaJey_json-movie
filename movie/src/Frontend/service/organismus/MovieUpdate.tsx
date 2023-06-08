@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 
 import { useNavigate, useParams } from "react-router-dom";
 
 import {useFormik } from "formik";
-import MovieService from "../service/MovieService";
+ import MovieService from "../service/MovieService";
 
 export default function MovieUpdate(){
     const{id}=useParams();

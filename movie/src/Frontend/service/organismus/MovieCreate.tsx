@@ -1,9 +1,10 @@
-import MovieService, { Movie } from "../service/MovieService";
-import { useFormik } from "formik/dist/Formik";
+import { useFormik } from "formik";
+import MovieService from "../service/MovieService";
 import { useNavigate, useParams } from "react-router-dom";
 
 
 export default function MovieCreate(){
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const{id}=useParams();
     const navigate = useNavigate();
  
@@ -17,8 +18,8 @@ const formik = useFormik({
     console.log("here",values);
     },
   });
-  const handleSubmit = (movie_name, release_date) => {
-    MovieService().createMovie(movie_name, release_date)
+  const handleSubmit = (movie_name: string, release_date: string) => {
+    MovieService().createMovie({movie_name, release_date })
       .then((response) => {
         console.log("response", response);
         navigate("/movies");
@@ -27,6 +28,7 @@ const formik = useFormik({
         console.error(error);
       });
   };
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <div>

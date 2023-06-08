@@ -1,8 +1,6 @@
-import React from "react";
-import { ErrorMessage, Field, Form, Formik, useFormik } from "formik";
-
-
-import { emit } from "process";
+import { useNavigate } from "react-router-dom";
+import LoginService from "../service/LoginService";
+import { useFormik } from "formik";
 
 export default function Login2() {
 const navigate = useNavigate();
@@ -20,7 +18,7 @@ const navigate = useNavigate();
       .then((response: any) => {
         console.log("response",response)
         localStorage.setItem("token", "Bearer " + response.data["accessToken"]);
-        navigate("/author")
+        navigate("/movies")
       })
       .catch((e: any) => {
         postMessage(e.response.data);

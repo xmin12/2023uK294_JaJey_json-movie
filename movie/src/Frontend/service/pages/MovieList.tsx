@@ -1,18 +1,15 @@
-import { Button, Grid, TextField } from "@mui/material";
-import { Card } from "@mui/material";
-import { AxiosInstance } from "axios";
+import { Button, Card } from "@mui/material";
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { moveEmitHelpers } from "typescript";
-import { defaultAxiosInstatnstace } from "../Api";
-import AuthorService, { Author } from "../service/MovieService";
+import { useNavigate } from "react-router-dom";
+import MovieService, { Movie } from "../service/MovieService";
 
-export default function Authorlist() {
-  const [authorName, setAuthorName] = useState<Author[]>([]);
+
+export default function MovieList() {
+  const [MovieName, setMovieName] = useState<Movie[]>([]);
   useEffect(() => {
-    AuthorService()
-      .getAllAuthors()
-      .then((response) => setAuthorName(response));
+    MovieService()
+      .getAllMovie()
+      .then((response) => setMovieName(response));
   }, []);
   const cardStyle = {
     bgcolor: "#fff4fc",
@@ -28,15 +25,15 @@ export default function Authorlist() {
   };
   const navigate= useNavigate();
   const handleClick = (id: string) => {
-    navigate("/author/" + id);
+    navigate("/movies/" + id);
   };
 
   return (
     <div>
-      {authorName.map((item, index) => {
+      {MovieName.map((item, index) => {
         return (
           <div>
-            <Card style={cardStyle}>{item.author_name}
+            <Card style={cardStyle}>{item.movie_name}
             <Button size="medium" className="detailsButton" onClick={()=>handleClick(item.id)}>
             Details
           </Button>

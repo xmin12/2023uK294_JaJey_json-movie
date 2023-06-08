@@ -1,9 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
-import MovieService from "../service/MovieService";
+ import MovieService from "../service/MovieService";
 import React, { useEffect } from "react";
 import Card from "@mui/material/Card/Card";
 import Button from "@mui/material/Button/Button";
 import { Create, Delete } from "@mui/icons-material";
+
 
 export default function MovieDetails() {
   const { id } = useParams();
@@ -15,10 +16,10 @@ export default function MovieDetails() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (id == undefined) {
+    if (id === undefined) {
       return;
     }
-    MovieService.getMovieById(id)
+    MovieService().getMovieById(id)
       .then((response: any) => {
         setMovie(response);
       })
@@ -29,9 +30,9 @@ export default function MovieDetails() {
   return (
     <div>
       <Card>
-        <p>Id: {id}</p>
-        <p>aName: {movie?.movie_name}</p>
-        <p>release date: {movie?.release_date}</p>
+        <p>ID: {id}</p>
+        <p>Movie Name: {movie?.movie_name}</p>
+        <p>Release Date: {movie?.release_date}</p>
       </Card>
       <div>
         <Button
@@ -40,13 +41,13 @@ export default function MovieDetails() {
           color="error"
           size="medium"
           onClick={() => {
-            if (id == undefined) {
+            if (id === undefined) {
               return;
             }
             MovieService()
               .removeMovie(id)
               .then((response: any) => {
-                navigate("/author");
+                navigate("/movies");
               })
               .catch((error: any) => {});
           }}
@@ -57,12 +58,12 @@ export default function MovieDetails() {
       </div>
       <div>
         <Button
-          className="creat"
+          className="create"
           variant="outlined"
           color="success"
           size="medium"
           onClick={() => {
-            if (id == undefined) {
+            if (id === undefined) {
               return;
             }
             MovieService()
@@ -72,9 +73,9 @@ export default function MovieDetails() {
               })
               .catch((error: any) => {});
           }}
-        >
-          <Create />
-          Creat
+        >      
+        <Create />
+          Create
         </Button>
       </div>
       <div>
@@ -84,7 +85,7 @@ export default function MovieDetails() {
           color="success"
           size="medium"
           onClick={() => {
-            if (id == undefined) {
+            if (id === undefined) {
               return;
             }
             navigate("/movies/update/" + id);
