@@ -33,7 +33,7 @@ export default function MovieCreate() {
   return (
     <form onSubmit={formik.handleSubmit}>
       <div>
-        <h1>New Movie</h1>
+        <h1>Add Movie</h1>
         <label htmlFor="Title">Name</label>
         <input
           id="Title"

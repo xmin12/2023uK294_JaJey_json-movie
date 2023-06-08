@@ -51,7 +51,7 @@ const MovieUpdate = () => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-     <h1>New Movie</h1>
+     <h1>Update Movie</h1>
       <div>
         <label htmlFor="Title">Name</label>
         <input
